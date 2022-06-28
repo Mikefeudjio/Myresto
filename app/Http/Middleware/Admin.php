@@ -17,6 +17,8 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         return $next($request);
-        if(!Auth()-check())
+        if(!Auth()->check() || !auth()->User()->is_Admin) {
+            abort(403); 
+        }
     }
 }
