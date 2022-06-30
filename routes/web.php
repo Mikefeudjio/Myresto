@@ -23,8 +23,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-route::middleware(['auth' , 'admin'])->name('admin')->prefix('admin')->group(function(){
-route::get('/', [AdminController::class, 'index'])->name('index.Admin');
+route::middleware(['auth' , 'admin'])->name('admin.')->prefix('admin')->group(function(){
+route::get('/', [AdminController::class, 'index'])->name('index');
 }); 
 
 require __DIR__.'/auth.php';
