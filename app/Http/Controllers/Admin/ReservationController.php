@@ -14,7 +14,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        return view('admin.Reservation.index.');
+        $reservations = Reservation::all();
+        return view('admin.Reservation.index', Compact('reservation'));
     }
 
     /**
