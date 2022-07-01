@@ -40,16 +40,16 @@
             <nav :class="{'block': open, 'hidden': !open}"
                 class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
                 <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-800" 
-                href="#" >blog</a>
+                href="{{route('admin.Category.index')}}" >Category</a>
 
                 <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-800" 
-                href="#" >portfolio</a>
+                href="{{route('admin.Menu.index')}}" >Menu</a>
                 
                 <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-800" 
-                href="#" >About</a>
+                href="{{route('admin.table.index')}}" >Tables</a>
 
                 <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:hover:bg-gray-800" 
-                href="#" >Contact</a>
+                href="{{route('admin.Reservation.index')}}" >Reservations</a>
                
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open"
