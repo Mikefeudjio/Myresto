@@ -35,9 +35,17 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryStorRequest $request)
     {
-        
+        $image = request -> file('image')->store('public/Categories');
+
+        Category::store([
+            'name'=> $request->name,
+            'description'=>$request->description,
+            'image' => $image
+        ]);
+        return to_route('admin.Category.index');
+
     }
 
     /**

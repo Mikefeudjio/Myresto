@@ -33,6 +33,7 @@ Route::resource('Category', CategoryController::class);
 Route::resource('Menu', MenuController::class);
 Route::resource('table', tableController::class);
 Route::resource('Reservation', ReservationController::class);
+Route::
 }); 
 
 require __DIR__.'/auth.php';
