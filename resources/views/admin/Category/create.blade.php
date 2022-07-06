@@ -16,7 +16,7 @@
 
         <div class="m-2 p-2 bg-slate-100 rounded">
             <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.Category.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="sm:col-span-6">
                         <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
