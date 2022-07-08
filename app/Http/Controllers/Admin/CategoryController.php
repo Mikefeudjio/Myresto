@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Http\Requests\CategoryStorRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,9 +37,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryStorRequest $request)
     {
-        $image = request -> file('image')->store('public/Categories');
+        $image = $request -> file('image')->store('public/Categories');
 
-        Category::store([
+        Category::create([
             'name'=> $request->name,
             'description'=>$request->description,
             'image' => $image
