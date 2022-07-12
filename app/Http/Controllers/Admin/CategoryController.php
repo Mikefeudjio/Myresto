@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Requests\CategoryStorRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\CategoryStorRequest;
 
 class CategoryController extends Controller
 {
@@ -65,9 +66,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $Category)
     {
-        //
+        return view('admin.Category.edite' , compact('Category'));
     }
 
     /**
@@ -77,9 +78,27 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $Category)
     {
-        //
+        
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required'
+         ]);
+
+         $image = $Category->image;
+        if($request->hasFile('image'))
+            {
+                Storage::delete($Category->image);
+                $image = $request -> file('image')->store('public/Categories');
+            }
+         
+         $Category->update([
+            'name'=> $request->name,
+            'description'=> $request->description,
+            'image'=> $image
+         ]);
+         return to_route('admin.Category.index');
     }
 
     /**
@@ -88,8 +107,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $Category)
     {
-        //
+        Storage::delete($Category->image);
+        $Category->delete();
+        return to_route('admin.Category.index');
     }
 }
