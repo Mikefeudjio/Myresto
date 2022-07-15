@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="flex justify-end m-2 p-2">
+        <div class="justify-end m-2 p-2">
             <a href="{{ route('admin.Menu.index')}}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">index menu</a>
         </div>
         <div class="m-2 p-2">
@@ -16,7 +16,7 @@
 
         <div class="m-2 p-2 bg-slate-100 rounded">
             <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
-                <form method="POST" action="{{route('admin.Category.store')}}" enctype="multipart/form-data">
+                <form method="POST" action="{{route('admin.Menu.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="sm:col-span-6">
                         <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>

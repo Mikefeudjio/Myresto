@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Menu extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','image', 'description', ''];
+    protected $fillable = ['name','image', 'description', 'price'];
     
         public function Categories()
         {

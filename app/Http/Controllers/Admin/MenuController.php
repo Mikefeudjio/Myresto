@@ -6,6 +6,7 @@ use App\Models\Menu;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MenuRequestMenu;
 
 class MenuController extends Controller
 {
@@ -37,9 +38,19 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MenuRequestMenu $request)
     {
-        //
+        
+        $image = $request -> file('image')->store('public/Menu');
+
+        Menu::create([
+            'name'=> $request->name,
+            'price'=> $request->price,
+            'description'=>$request->description,
+            'image' => $image
+        ]);
+        return to_route('admin.Menu.index');
+
     }
 
     /**
