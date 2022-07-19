@@ -18,7 +18,7 @@ class MenuController extends Controller
     public function index()
     {
         $Menu = Menu::all();
-    return view('admin.Menu.index');
+    return view('admin.Menu.index' , Compact('Menu'));
     }
 
     /**
@@ -43,12 +43,15 @@ class MenuController extends Controller
         
         $image = $request -> file('image')->store('public/Menu');
 
-        Menu::create([
+        $Menu = Menu::create([
             'name'=> $request->name,
             'price'=> $request->price,
             'description'=>$request->description,
             'image' => $image
         ]);
+        if($request->has('Categories')){
+            $Menu ->Categories->attach($request->Categories);
+        }
         return to_route('admin.Menu.index');
 
     }
@@ -70,9 +73,10 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Menu $Menu)
     {
-        //
+        $Categories = Category::all();
+        return view('admin.Menu.edite', Compact('Categories'));
     }
 
     /**
