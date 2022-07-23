@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MenuRequestMenu;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -76,7 +77,7 @@ class MenuController extends Controller
     public function edit(Menu $Menu)
     {
         $Categories = Category::all();
-        return view('admin.Menu.edite', Compact('Categories'));
+        return view('admin.Menu.edit', Compact('Categories','Menu'));
     }
 
     /**
@@ -86,9 +87,30 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Menu $Menu)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'price'=>'required'
+         ]);
+
+         $image = $Menu->image;
+        if($request->hasFile('image'))
+            {
+                Storage::delete($Menu->image);
+                $image = $request -> file('image')->store('public/Menu');
+            }
+         
+         $Menu->update([
+            'name'=> $request->name,
+            'description'=> $request->description,
+            'image'=> $image
+         ]);
+         if($request->has('Categories')){
+            $Menu ->Categories->sync($request->Categories);
+        }
+         return to_route('admin.Menu.index');
     }
 
     /**
@@ -97,8 +119,10 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Menu $Menu)
     {
-        //
+        Storage::delete($Menu->image);
+        $Menu->delete();
+        return to_route('admin.Menu.index');
     }
 }
