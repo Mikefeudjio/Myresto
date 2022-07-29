@@ -1,6 +1,6 @@
 <?php
 namespace app\Enums;
-enum tableLocation: String
+enum tableLocation: string
 {
     case Front = 'front';
     case Inside = 'inside';

@@ -1,6 +1,6 @@
 <?php
-namespace app\Enums;
-enum tableStatus: String
+namespace App\Enums;
+enum tableStatus: string
 {
     case Pending = 'pending';
     case Avaliable = 'avaliable';

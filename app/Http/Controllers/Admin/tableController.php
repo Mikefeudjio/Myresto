@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\table;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TableStoreRequest;
 
 class tableController extends Controller
 {
@@ -35,9 +36,15 @@ class tableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TableStoreRequest $request)
     {
-        //
+      table::create([
+        'name' => $request->name,
+        'guest_number' => $request-> guest_number,
+        'Status' => $request-> Status,
+        'Location' => $request-> Location,
+      ]);
+      return to_route('admin.table.index');
     }
 
     /**
@@ -57,9 +64,9 @@ class tableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(table $table)
     {
-        //
+        return view('admin.table.edit', compact('table'));
     }
 
     /**
