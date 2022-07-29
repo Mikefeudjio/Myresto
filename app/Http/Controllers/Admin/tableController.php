@@ -76,9 +76,11 @@ class tableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TableStoreRequest $request, table $table)
     {
-        //
+        $table->update($request->validated());
+
+        return to_route('admin.table.index');
     }
 
     /**
@@ -87,8 +89,10 @@ class tableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(table $table)
     {
-        //
+        $table->delete();
+        
+        return to_route('admin.table.index');
     }
 }
